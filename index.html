@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BF Suma - Complete Real Branches</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+body{font-family:'Poppins',Arial;background:#e8efe9;padding:15px;display:flex;gap:15px;flex-wrap:wrap}
+.panel{background:white;padding:18px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.1);width:380px;max-height:95vh;overflow:auto}
+.panel label{display:block;margin-top:9px;font-weight:700;font-size:11px;color:#0a332c}
+.panel input, .panel textarea, .panel select{width:100%;padding:8px;margin-top:3px;border:1px solid #aaa;border-radius:5px;font-size:12px;box-sizing:border-box}
+button{background:#0a332c;color:white;padding:14px;border:none;border-radius:6px;cursor:pointer;width:100%;margin-top:12px;font-weight:800;font-size:16px}
+#card{width:1000px;background:#f8f9f7;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1px #ddd;font-family:'Poppins',Arial}
+.top{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;background:linear-gradient(105deg, #fff 0%, #fff 58%, #0a332c 58%, #0a332c 100%)}
+.logo-left{display:flex;align-items:center;gap:12px}
+.logo-icon{width:88px;height:88px;background:linear-gradient(135deg,#d4a84b,#8c6a2a);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:32px}
+.brand h2{margin:0;color:#0a332c;font-size:26px;line-height:1.1;font-weight:800}
+.brand h2 span{color:#b08a3a}
+.brand p{margin:2px 0 0 0;font-size:10px;color:#555}
+.top-right{color:white;text-align:left}
+.appt-bar{background:#0a332c;color:white;text-align:center;padding:12px;font-weight:700;font-size:28px;display:flex;align-items:center;justify-content:center;gap:15px}
+.appt-bar .dot{width:8px;height:8px;background:#c9a86a;border-radius:50%}
+.appt-bar .line{height:1px;background:#c9a86a;flex:1;max-width:120px}
+.thanks{text-align:center;padding:10px;color:#333;font-size:14px}
+.main{display:flex;padding:15px 20px;gap:20px}
+.left{flex:1.4;border-right:1px solid #ddd;padding-right:18px}
+.right{flex:1}
+.patient-label{font-weight:700;color:#0a332c;font-size:13px}
+.patient-name{font-size:26px;font-weight:800;color:#0a332c;margin:8px 0 10px 0;border-bottom:1px solid #ccc;padding-bottom:8px}
+.row{display:flex;margin:8px 0;font-size:13px}
+.row .icon{width:26px;height:26px;background:#0a332c;color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:8px}
+.row .lbl{width:150px;font-weight:600;color:#333}
+.row .val{flex:1;color:#222}
+.row .val small{display:block;color:#666;font-size:10px}
+.service-box{border:1.5px solid #0a332c;border-radius:12px;padding:14px}
+.service-box .head{font-weight:800;color:#0a332c;display:flex;gap:8px;align-items:center;font-size:13px;margin-bottom:6px}
+.service-box .head .ic{width:28px;height:28px;background:#0a332c;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white}
+.service-box p{font-size:12px;line-height:1.4;color:#333;margin:0}
+.served{margin-top:22px}
+.served .lbl{font-weight:700;font-size:13px;color:#0a332c}
+.served .name{font-weight:800;font-size:18px;color:#0a332c;margin-top:6px;border-top:1px solid #0a332c;display:inline-block;padding-top:4px;min-width:180px}
+.bottom-bar{background:#0a332c;color:white;text-align:center;padding:8px 15px;border-radius:20px;margin:15px 18px;font-size:13px;font-weight:600}
+.footer{display:flex;justify-content:space-between;padding:12px 20px 18px 20px;align-items:center}
+.footer .contact{display:flex;gap:10px;align-items:center}
+.footer .contact .ic{width:36px;height:36px;background:#0a332c;border-radius:50%;display:flex;align-items:center;justify-content:center;color:white}
+.footer .thank{font-family:'Brush Script MT',cursive;font-size:28px;color:#0a332c;font-style:italic}
+.footer .sep{width:1px;height:40px;background:#bbb;margin:0 15px}
+</style>
+</head>
+<body>
+
+<div class="panel">
+<label>Patient Name</label>
+<input id="pname" placeholder="Enter name">
+
+<label>BF SUMA BRANCH - COMPLETE - Auto Address!</label>
+<select id="branch">
+<option value="">-- Select Branch --</option>
+<optgroup label="NAIROBI OFFICIAL (HQ)">
+<option value="Nairobi - Mfangano Street Branch">Nairobi HQ - Mfangano St, Rainbow Hotel</option>
+<option value="Nairobi - Kasarani Branch">Nairobi - Kasarani - Mwiki Road</option>
+<option value="Nairobi - Kayole Branch">Nairobi - Kayole - Spine Road, Opp Naivas</option>
+<option value="Nairobi - Zimmerman Branch">Nairobi - Zimmerman</option>
+<option value="Nairobi - Shauri Moyo Branch">Nairobi - Shauri Moyo - Butecho Road</option>
+<option value="Nairobi - Ngara Branch">Nairobi - Ngara</option>
+</optgroup>
+<optgroup label="COAST REGION">
+<option value="Mombasa Branch">Mombasa - Ambalal House, Digo Road</option>
+<option value="Kilifi Branch">Kilifi - Kilifi Town</option>
+<option value="Kwale Branch">Kwale - Kwale Town</option>
+</optgroup>
+<optgroup label="EASTERN REGION">
+<option value="Machakos Branch">Machakos - Off Wote Road</option>
+<option value="Kitui Branch">Kitui - Kitui Town</option>
+<option value="Kitengela Branch">Kitengela - Prisons Road</option>
+<option value="Mtito Andei Branch">Mtito Andei - Mombasa Road</option>
+<option value="Meru Branch">Meru - Meru Town</option>
+<option value="Embu Branch">Embu - Embu Town</option>
+</optgroup>
+<optgroup label="RIFT VALLEY - YOUR REGION">
+<option value="Nakuru Branch">Nakuru - Eldoret Metro Tower, 4th Floor</option>
+<option value="Eldoret Branch">Eldoret - Zion Mall, 1st Floor, Oloo Street</option>
+<option value="Kericho Branch">Kericho - Kericho Arcade, Tea Hotel Road</option>
+<option value="Bomet Branch">Bomet - Bomet Arcade, Next to Stadium</option>
+<option value="Narok Branch">Narok - Oltalet Mall, 1st Floor</option>
+<option value="Kajiado Branch">Kajiado - Kajiado Town Plaza</option>
+<option value="Kitale Branch">Kitale - Khetia's Building</option>
+<option value="Nandi Branch">Nandi - Kapsabet Town</option>
+<option value="Baringo Branch">Baringo - Kabarnet Town</option>
+</optgroup>
+<optgroup label="WESTERN & NYANZA">
+<option value="Kisumu Branch">Kisumu - Swan Centre, 3rd Floor</option>
+<option value="Kakamega Branch">Kakamega - Joyex Building</option>
+<option value="Bungoma Branch">Bungoma - Bungoma Town Plaza</option>
+<option value="Kisii Branch">Kisii - Ouru Complex, 2nd Floor</option>
+<option value="Migori Branch">Migori - Migori Town</option>
+<option value="Homa Bay Branch">Homa Bay - Homa Bay Town</option>
+</optgroup>
+<optgroup label="CENTRAL & MT KENYA">
+<option value="Thika Branch">Thika - Thika Business Centre, Kenyatta Ave</option>
+<option value="Kiambu Branch">Kiambu - Kiambu Mall</option>
+<option value="Nyeri Branch">Nyeri - Nyeri Town Plaza</option>
+<option value="Kirinyaga Branch">Kirinyaga - Kerugoya Town</option>
+<option value="Muranga Branch">Murang'a - Murang'a Town Plaza</option>
+</optgroup>
+<option value="Custom Branch">Custom Branch - Type your own</option>
+</select>
+<input id="customBranch" placeholder="Type custom branch" style="display:none;margin-top:5px">
+
+<label>Address - Auto allocated (Editable)</label>
+<input id="addr" value="" placeholder="Auto allocated">
+
+<label>Date</label>
+<input id="date" type="date">
+<label>Time</label>
+<input id="time" type="time">
+
+<label>Service</label>
+<select id="service">
+<option>Full Body Screening</option>
+<option>Blood Pressure Check</option>
+<option>Arthritis & Joint Care</option>
+<option>Diabetes Screening</option>
+<option>General Consultation</option>
+<option>Wound Care</option>
+<option>Health Education</option>
+<option>Home Based Care</option>
+<option>BF Suma Supplements</option>
+<option>Custom</option>
+</select>
+<input id="customService" placeholder="Type custom service" style="display:none;margin-top:5px">
+<textarea id="desc"></textarea>
+
+<label>Charges</label>
+<input id="charges" value="KSh 2,000">
+<label>Booking Number</label>
+<input id="booking">
+<label>Served By</label>
+<input id="served" placeholder="e.g. TEDDY MWENDA" value="TEDDY MWENDA">
+<label>YOUR NUMBER</label>
+<input id="wa" value="0740432874" style="border:2px solid #0a332c;background:#e8f5e9;font-weight:800;font-size:16px">
+
+<button onclick="downloadAsPicture()">📥 DOWNLOAD AS PICTURE ONLY</button>
+<p id="status" style="font-size:12px;color:green;font-weight:bold"></p>
+</div>
+
+<div id="card">
+  <div class="top"><div class="logo-left"><div class="logo-icon">🌿</div><div class="brand"><h2>AfyaMaishani<br><span style="margin-left:60px">Care</span></h2><p>BF Suma Official Partner - Countrywide</p></div></div><div class="top-right"><div class="title">YOUR HEALTH<br>OUR PRIORITY</div><div class="line"></div><div class="small">🛡️ Prevent • Detect<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Treat • Thrive</div></div></div>
+  <div class="appt-bar"><div class="line"></div><div class="dot"></div> APPOINTMENT CARD <div class="dot"></div><div class="line"></div></div>
+  <div class="thanks">Thank you for choosing BF Suma / AfyaMaishani Care.</div>
+  <div class="main">
+    <div class="left">
+      <div class="patient-label">👤 PATIENT DETAILS</div>
+      <div class="patient-name" id="outName">FESTUS MWANZIA</div>
+      <div class="row"><div class="icon">📍</div><div class="lbl">BRANCH</div><div class="val" id="outBranch">: Nakuru Branch<br><small>Address auto allocated</small></div></div>
+      <div class="row"><div class="icon">📅</div><div class="lbl">DATE</div><div class="val" id="outDate">: 18th Oct, 2026</div></div>
+      <div class="row"><div class="icon">🕒</div><div class="lbl">TIME</div><div class="val" id="outTime">: 11:00 AM</div></div>
+      <div class="row"><div class="icon">🩺</div><div class="lbl">SERVICE</div><div class="val" id="outService">: Full Body Screening</div></div>
+      <div class="row"><div class="icon">💰</div><div class="lbl">CHARGES</div><div class="val" id="outCharges">: KSh 2,000<br><small>Payable at the facility</small></div></div>
+      <div class="row"><div class="icon">📄</div><div class="lbl">BOOKING NUMBER</div><div class="val" id="outBooking">: KE141561919</div></div>
+    </div>
+    <div class="right">
+      <div class="service-box"><div class="head"><div class="ic">❤</div><span id="outServiceHead">FULL BODY SCREENING</span></div><p id="outDesc">A comprehensive wellness assessment.</p></div>
+      <div class="served"><div class="lbl">👤 SERVED BY</div><div class="name" id="outServed">TEDDY MWENDA</div></div>
+    </div>
+  </div>
+  <div class="bottom-bar">ⓘ KINDLY ARRIVE 15 MINUTES EARLY FOR YOUR APPOINTMENT.</div>
+  <div class="footer"><div class="contact"><div class="ic">W</div><div><div style="font-size:12px">Need to reschedule?</div><b id="outWa">Call/WhatsApp: 0740432874</b><div style="font-size:11px">We're here to help.</div></div></div><div style="display:flex;align-items:center"><div class="sep"></div><div class="thank">Thank you!</div><div class="sep"></div><div style="font-size:12px">BF Suma<br>Countrywide ♥</div></div></div>
+</div>
+
+<canvas id="downloadCanvas" width="1000" height="720" style="display:none"></canvas>
+<script src="script.js"></script>
+</body>
+</html>
